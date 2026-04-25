@@ -3,8 +3,11 @@ import { Coupons } from '../constants';
 import CouponCard from './CouponCard';
 import AnimatedText from './AnimatedText';
 import { improveTypography } from '../lib/typography';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 const CouponPalace: React.FC = () => {
+  const prefersReduced = usePrefersReducedMotion();
+
   return (
     <section className="min-h-screen py-24 px-4 sm:px-6 lg:px-8 relative z-10 bg-gradient-to-b from-[#0a041d] to-[#1d0b38]">
       <div className="text-center mb-16">
@@ -17,23 +20,26 @@ const CouponPalace: React.FC = () => {
       </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {Coupons.map((coupon, index) => (
-          <div key={coupon.id} style={{ animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both` }}>
+          <div
+            key={coupon.id}
+            style={
+              prefersReduced
+                ? undefined
+                : { animation: `fadeInUp 0.5s ease-out ${index * 0.08}s both` }
+            }
+          >
             <CouponCard coupon={coupon} />
           </div>
         ))}
       </div>
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
+      {!prefersReduced && (
+        <style>{`
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+        `}</style>
+      )}
     </section>
   );
 };

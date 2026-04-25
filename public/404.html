@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>You Are Enough, Tabitha</title>
+  <script>
+    // Redirect unknown paths back to the SPA root on GitHub Pages.
+    // Preserves the path as a query parameter so the app can optionally handle it.
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      '/tabi/' +
+      (l.pathname.slice(1) ? '?p=/' + l.pathname.slice(1).replace(/&/g, '~and~') : '') +
+      (l.search ? (l.pathname.slice(1) ? '&q=' : '?q=') + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+<body>
+  <p>Redirecting&hellip;</p>
+</body>
+</html>
