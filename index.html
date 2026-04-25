@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a041d" />
+    <meta name="description" content="A love letter — for Tabitha." />
+    <meta property="og:title" content="You Are Enough, Tabitha" />
+    <meta property="og:description" content="A love letter — for Tabitha." />
+    <meta property="og:type" content="website" />
     <title>You Are Enough, Tabitha</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Preconnect to font origins for faster delivery -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts with display=swap to prevent FOIT -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+    <!-- Tailwind utility classes (CDN — swap for a PostCSS build for production perf gains) -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <style>
+      /* ─── Base fonts ─── */
       body {
         font-family: 'Montserrat', sans-serif;
         --scroll-progress: 0;
@@ -16,25 +25,24 @@
       .font-cinzel {
         font-family: 'Cinzel Decorative', cursive;
       }
-      /* Custom scrollbar for a more elegant look */
-      ::-webkit-scrollbar {
-        width: 8px;
+
+      /* ─── Typography: prevent mid-word breaks everywhere ─── */
+      * {
+        hyphens: none;
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
       }
-      ::-webkit-scrollbar-track {
-        background: #0a041d;
+      h1, h2, h3 {
+        text-wrap: balance;
+        letter-spacing: -0.015em;
+        line-height: 1.15;
       }
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #ff7e5f, #feb47b, #86a8e7, #7f7fd5);
-        border-radius: 4px;
+      p {
+        text-wrap: pretty;
+        line-height: 1.75;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, #ff9e7f, #fec49b, #96b8f7, #8f8fE5);
-      }
-      /* For text stroke effect */
-      .text-stroke {
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-        text-stroke: 1px rgba(255, 255, 255, 0.5);
-      }
+
+      /* ─── Holographic / animated keyword effects ─── */
       .holographic-text {
         background-image: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
         background-size: 200% 100%;
@@ -45,7 +53,6 @@
       }
       .keyword-holographic {
         position: relative;
-        /* Combines gradient shine with RGB split */
         background-image: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
         background-size: 200% 100%;
         -webkit-background-clip: text;
@@ -54,28 +61,47 @@
         animation: holographic-shine 4s linear infinite, holographic-glitch 5s infinite;
       }
       @keyframes holographic-shine {
-        to {
-          background-position: 200% 0;
-        }
+        to { background-position: 200% 0; }
       }
       @keyframes holographic-glitch {
-        0% { text-shadow: .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
-        25% { text-shadow: -.5px 0 0 #ff00de, .5px 0 0 #00f6ff; }
-        50% { text-shadow: .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
-        74% { text-shadow: none; }
-        75% { text-shadow: -.5px 0 0 #ff00de, .5px 0 0 #00f6ff; }
-        100% { text-shadow: .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
+        0%   { text-shadow:  .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
+        25%  { text-shadow: -.5px 0 0 #ff00de,  .5px 0 0 #00f6ff; }
+        50%  { text-shadow:  .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
+        74%  { text-shadow: none; }
+        75%  { text-shadow: -.5px 0 0 #ff00de,  .5px 0 0 #00f6ff; }
+        100% { text-shadow:  .5px 0 0 #ff00de, -.5px 0 0 #00f6ff; }
       }
+
+      /* ─── Floating animation ─── */
       @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
+        0%   { transform: translateY(0px); }
+        50%  { transform: translateY(-18px); }
         100% { transform: translateY(0px); }
       }
       .animate-float {
         animation: float 6s ease-in-out infinite;
+        will-change: transform;
       }
+
+      /* ─── Utility ─── */
       .text-balance { text-wrap: balance; }
-      .text-pretty { text-wrap: pretty; }
+      .text-pretty  { text-wrap: pretty; }
+
+      /* ─── Reduced-motion override ─── */
+      @media (prefers-reduced-motion: reduce) {
+        .keyword-holographic,
+        .holographic-text,
+        .animate-float,
+        .animate-pulse,
+        [style*="animation"] {
+          animation: none !important;
+          transition: none !important;
+        }
+        .keyword-holographic {
+          background-image: none;
+          color: #c084fc;
+        }
+      }
     </style>
 <script type="importmap">
 {
@@ -87,10 +113,10 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="./index.css">
 </head>
 <body class="bg-black">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

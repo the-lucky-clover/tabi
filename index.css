@@ -1,0 +1,76 @@
+/* ─── Global typography & performance resets ─── */
+
+/* Font smoothing for crisp text on all platforms */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+/* Disable ALL hyphenation site-wide */
+*, *::before, *::after {
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Headings: balanced wrapping, never break mid-word */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: none;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* Body copy: pretty wrapping (reduces orphans), no mid-word breaks */
+p, li, blockquote {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  hyphens: none;
+  line-height: 1.7;
+}
+
+/* Prevent layout-thrashing for animated elements */
+.animate-float,
+.animate-pulse,
+[style*="animation"] {
+  will-change: transform, opacity;
+}
+
+/* GPU-friendly parallax layers */
+.parallax-layer {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reduced-motion: kill all transitions & animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Prevent FOUC for font-dependent elements */
+@font-face {
+  font-display: swap;
+}
+
+/* ─── Scrollbar polish ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a041d; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c084fc, #f472b6, #818cf8);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #d8b4fe, #fb7185, #a5b4fc);
+}
